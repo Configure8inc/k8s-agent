@@ -1,4 +1,4 @@
-name: trivy-scan
+name: Tests
 on:
   push:
     branches:
