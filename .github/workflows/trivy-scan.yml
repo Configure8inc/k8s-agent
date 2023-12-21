@@ -1,0 +1,25 @@
+name: trivy-scan
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+  
+jobs:
+  scan:
+    name: Trivy scan
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@vr
+
+    - name: Run Trivy vulnerability scanner in fs mode
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        exit-code: 1
+        vuln-type: 'os,library'
+        severity: 'CRITICAL,HIGH'
+        scanners: 'vuln,secret'
+        format: 'table'
