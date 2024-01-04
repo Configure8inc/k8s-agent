@@ -6,8 +6,8 @@ Discover, watch and catalog resources from any K8s cluster within your service c
 > Summary - Launch a Configure8 Kubernetes Agent
 1. [Add configure8 chart repository to install K8s agent](#adding-configure8-chart-repository)
 2. [Configure K8s agent](#configure-k8s-agent)
-3. [Run K8s agent](#run-k8s-agent)
-4. The agent will start discovery and catalog resources. You can [find your resources in catalog](#the-agent-will-start-discovery-and-catalog-resources). Done!
+3. [Run K8s agent](#installing-k8s-agent)
+4. The agent will start discovery and catalog resources. You can [find your resources in catalog](#visualizing-k8s-resources-in-configure8). Done!
 
 ## Configure8 K8s agent
 
@@ -38,12 +38,12 @@ After performing initial sync and removing deprecated data, agent enters watch m
 ## Prerequisite
 In order to launch configure8 K8s agent, you will need to create API key. Please check the [following page](https://docs.configure8.io/configure8-product-docs/fundamentals/settings/api-key-management#create) for more information.
 
-## Adding configure8 chart repository {#adding-configure8-chart-repository}
+## Adding configure8 chart repository
 
 Adds [Configure8](https://app.configure8.io) chart repository
 
 ```bash
-helm repo add c8 https://helm.configure8.io/store/
+helm repo add c8 https://k8s-agent-helm.configure8.io/store/
 helm repo update
 ```
 
@@ -57,7 +57,7 @@ NAME           	CHART VERSION	APP VERSION	DESCRIPTION
 c8/c8-k8s-agent	0.0.4        	1.0.0      	A Helm chart for c8 k8s-agent
 ```
 
-## Configure K8s agent {#configure-k8s-agent}
+## Configure K8s agent
 
 You can configure the chart before installing. Here is the list of props to customise:
 
@@ -125,7 +125,7 @@ That is why it's important to create an individual logical group for every K8s a
 > We recommend to choose some scheme which is suitable for your case to set provider account ids for agents.
 Here is one of possible solutions. If you have multiple clusters in one AWS account, you can use this pattern for provider account ids - aws-account-id/region/cluster-name
 
-## Installing K8s agent {#run-k8s-agent}
+## Installing K8s agent
 
 Create a secret that will contain CONFIGURE8_API_TOKEN to communicate with C8 (please don't forget to add -n 'namespace' if you want to install c8-k8s-agent to the specific namespace)
 
@@ -168,7 +168,7 @@ helm install my-release c8/c8-k8s-agent \
 
 After successful installation you can check status using ```helm status``` and check K8s agent pod logs to ensure that agent works correctly.
 
-## Visualizing K8s resources in configure8 {#the-agent-will-start-discovery-and-catalog-resources}
+## Visualizing K8s resources in configure8
 
 After configure8 start receiving information form the K8s agent, you will be able to see the following new [Cloud Resources](https://docs.configure8.io/configure8-product-docs/fundamentals/resources) types:
 
