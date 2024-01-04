@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "c8-k8s-agent.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "c8-k8s-agent.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "c8-k8s-agent.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "c8-k8s-agent.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "c8-k8s-agent.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- if .Values.securityContext }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default "latest" }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          envFrom:
+          {{- include "helpers.variables_from_secrets" . | indent 10 }}
+          {{- include "helpers.variables_from_configmaps" . | indent 10 }}
+          env:
+          {{- if .Values.variables.CONFIGURE8_URL }}
+          - name: CONFIGURE8_URL
+            value: {{ .Values.variables.CONFIGURE8_URL }}
+          {{- end -}}
+          {{- if .Values.variables.CLUSTER_RESOURCE_KEY }}
+          - name: CLUSTER_RESOURCE_KEY
+            value: {{ .Values.variables.CLUSTER_RESOURCE_KEY | quote }}
+          {{- end -}}
+          {{- if .Values.variables.LOGGING_LEVEL }}
+          - name: LOGGING_LEVEL
+            value: {{ .Values.variables.LOGGING_LEVEL }}
+          {{- end -}}
+          {{- if .Values.variables.PROVIDER_ACCOUNT_ID }}
+          - name: PROVIDER_ACCOUNT_ID
+            value: {{ .Values.variables.PROVIDER_ACCOUNT_ID | quote }}
+          {{- end -}}
+          {{- if .Values.variables.FREQUENCY_HOURS }}
+          - name: FREQUENCY_HOURS
+            value: {{ .Values.variables.FREQUENCY_HOURS | quote }}
+          {{- end -}}
+          {{- include "addConfigure8APIToken" . | nindent 10 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

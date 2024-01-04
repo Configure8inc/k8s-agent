@@ -1,0 +1,9 @@
+apiVersion: v2
+name: c8-k8s-agent
+description: A Helm chart for c8 k8s-agent
+
+type: application
+
+version: 0.0.16
+
+appVersion: "1.1.1"
