@@ -1,0 +1,29 @@
+{
+  "name": "c8-k8s-agent",
+  "version": "1.1.1",
+  "description": "Configure8 K8 agent",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc --build --force",
+    "start": "node ./dist/index.js",
+    "lint": "eslint 'src/**/*.ts' --fix",
+    "format": "prettier \"src/**/*.ts\" --write"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@kubernetes/client-node": "^0.18.1",
+    "axios": "^1.4.0",
+    "axios-retry": "^3.5.1",
+    "pino": "^8.14.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8",
+    "typescript": "^5.1.3"
+  }
+}
