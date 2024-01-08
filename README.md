@@ -1,5 +1,7 @@
 # Kubernetes agent
 
+![Trivy scanner](https://github.com/Configure8inc/k8s-agent/actions/workflows/trivy-scan.yml/badge.svg)
+
 Discover, watch and catalog resources from any K8s cluster within your service catalog without making you K8s cluster public.
 
 > **Note**
@@ -43,7 +45,7 @@ In order to launch configure8 K8s agent, you will need to create API key. Please
 Adds [Configure8](https://app.configure8.io) chart repository
 
 ```bash
-helm repo add c8 https://k8s-agent-helm.configure8.io/store/
+helm repo add c8-k8s-agent https://k8s-agent-helm.configure8.io/store/
 helm repo update
 ```
 
@@ -54,7 +56,7 @@ To check available charts:
 ```
 helm search repo c8-k8s-agent
 NAME           	CHART VERSION	APP VERSION	DESCRIPTION
-c8/c8-k8s-agent	0.0.4        	1.0.0      	A Helm chart for c8 k8s-agent
+c8-k8s-agent/c8-k8s-agent 	0.0.4        	1.0.0      	A Helm chart for c8 k8s-agent
 ```
 
 ## Configure K8s agent
