@@ -3,9 +3,6 @@ name: "Build"
 on:
   release:
     types: [released]
-  push:
-    branches:
-    - users/eugene/C8-4965-v3
 
 jobs:
   build:
