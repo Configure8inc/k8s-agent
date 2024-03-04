@@ -19,6 +19,7 @@ Whether you are operating a Kubernetes cluster in AWS EKS, GCP GKE, on-premise o
 
 ## Key features:
 
+
 1. Seamless Integration: The K8s Agent effortlessly integrates into your Kubernetes cluster, regardless of the underlying cloud provider or deployment environment. It works harmoniously with popular platforms like AWS EKS, GCP GKE, and others, allowing you to extract data consistently across different infrastructures.
 2. Efficient Resource Utilization: The K8s Agent is designed to be lightweight and optimized for Kubernetes. It minimizes its impact on the overall cluster performance and resource consumption while efficiently handling data collection tasks. This ensures that your cluster's resources are utilized effectively for running your applications. The most resource-intensive task is performed on agent start, when agent synchronizes all existing cluster resources and catalog. After performing initial data sync, agent will start watching cluster changes, so that on the next sync only changed data will be updated in the catalog.
 3. Flexible Configuration: The agent offers flexible configuration options, allowing you to customize its behavior according to your specific needs. You can define the interval for data sync, specify data for building correct relations etc.
