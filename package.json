@@ -13,8 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "@kubernetes/client-node": "^0.18.1",
-    "axios": "^1.4.0",
-    "axios-retry": "^3.5.1",
+    "axios": "^1.6.5",
+    "axios-retry": "^4.0.0",
     "pino": "^8.14.1"
   },
   "devDependencies": {

@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   # -- c8 k8s-agent repo
-  repository: public.ecr.aws/c8-public/c8-k8s-agent
+  repository: ghcr.io/configure8inc/k8s-agent
   # -- Image pull policy
   pullPolicy: IfNotPresent
   # -- Overrides the image tag whose default is the latest.
